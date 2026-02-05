@@ -8,21 +8,22 @@
 | Framework | Flask 3.x |
 | Database | PostgreSQL (Dockerized) |
 | ORM | SQLAlchemy 2.x |
-| Migrations | Raw SQL + Python runner script |
+| Migrations | Raw SQL + Python runner (up/status/down, schema_migrations) |
 | Validation | Marshmallow (Flask-Marshmallow, marshmallow-sqlalchemy) |
 | API docs | Flask-SMOREST (OpenAPI/Swagger) |
 | DI | Flask-Injector |
-| Task queue | Celery, broker RabbitMQ |
+| Task queue | Celery, broker RabbitMQ (Phase IV; Compose profile `celery`) |
 | Auth | Flask-JWT-Extended (Phase IV) |
 | Testing | pytest, pytest-cov, pytest-flask (80% coverage goal) |
 | Containers | Docker, Docker Compose |
 
 ## Development Setup
 
-- **Env**: `python -m venv venv`, `pip install -r requirements.txt`; use `.env` (see `.env.example`).
-- **DB**: Docker Compose starts Postgres (port 5432) and RabbitMQ (5672, management 15672). Run `python migrations/run_migrations.py` to apply SQL migrations.
-- **App**: `flask run` or Docker Compose app service (port 5000); Swagger at `http://localhost:5000/swagger`.
-- **Tests**: `pytest`; use `TestingConfig` and test DB (e.g. `job_board_test`).
+1. **Venv and deps**: `python3 -m venv venv`, activate, `pip install -r requirements.txt`. Use `.env` (see `.env.example`).
+2. **DB**: Docker Compose starts Postgres (5432) and RabbitMQ (5672, management 15672). Run migrations with venv active: `python migrations/run_migrations.py up`.
+3. **App**: Either (a) Docker app service (`docker-compose up -d` → app on 5000) or (b) local `FLASK_APP=run_server flask run`. Do not run both; Docker app binds 5000 and causes "address already in use" if you also run `flask run`.
+4. **Swagger**: http://localhost:5000/swagger (when app is running via Docker or locally).
+5. **Tests**: `pytest`; use `TestingConfig` and test DB (e.g. `job_board_test`).
 
 ## Technical Constraints
 
@@ -39,4 +40,4 @@
 - flask-smorest 0.42.3
 - pytest 7.4.3, pytest-cov 4.1.0, pytest-flask 1.3.0
 
-Exact versions should be pinned in `requirements.txt`; only add/change after checking compatibility with Python 3.11 and each other.
+Exact versions pinned in `requirements.txt`; only add/change after checking compatibility with Python 3.11 and each other.

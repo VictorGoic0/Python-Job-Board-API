@@ -15,6 +15,10 @@ def create_app(config_name='development'):
     api.init_app(app)
     CORS(app)
 
+    from app.utils.error_handlers import register_error_handlers
+
+    register_error_handlers(app)
+
     _configure_injector(app)
 
     return app

@@ -67,14 +67,14 @@
   - [x] Add success/failure logging
 
 #### 1.6 Testing and Verification
-- [ ] Create venv and install dependencies: `python3 -m venv venv`, `source venv/bin/activate`, `pip install -r requirements.txt`
-- [ ] Start Docker Compose (postgres, rabbitmq, app): `docker-compose up -d`
-- [ ] Verify PostgreSQL is running and accessible
-- [ ] Verify RabbitMQ is running (management UI at http://localhost:15672)
-- [ ] Run migrations locally (venv active, DATABASE_URL pointing at Postgres): `python migrations/run_migrations.py up`
-- [ ] Verify tables created in PostgreSQL (e.g. `schema_migrations`, `company`, `job`)
-- [ ] Verify Flask app: when Docker app service is running, the app is already served on port 5000 — do **not** run `flask run` locally or you get "address already in use". Use Docker for the app, or stop the app container and run `FLASK_APP=run_server flask run` locally.
-- [ ] Access Swagger UI at http://localhost:5000/swagger
+- [x] Create venv and install dependencies: `python3 -m venv venv`, `source venv/bin/activate`, `pip install -r requirements.txt`
+- [x] Start Docker Compose (postgres, rabbitmq, app): `docker-compose up -d`
+- [x] Verify PostgreSQL is running and accessible
+- [x] Verify RabbitMQ is running (management UI at http://localhost:15672)
+- [x] Run migrations locally (venv active, DATABASE_URL pointing at Postgres): `python migrations/run_migrations.py up`
+- [x] Verify tables created in PostgreSQL (e.g. `schema_migrations`, `company`, `job`)
+- [x] Verify Flask app: when Docker app service is running, the app is already served on port 5000 — do **not** run `flask run` locally or you get "address already in use". Use Docker for the app, or stop the app container and run `FLASK_APP=run_server flask run` locally.
+- [x] Access Swagger UI at http://localhost:5000/swagger
 
 ---
 
@@ -89,98 +89,98 @@
 ### Subtasks:
 
 #### 2.1 Enums
-- [ ] Create `app/models/enums.py`
-- [ ] Define `JobType` enum (FULL_TIME, PART_TIME, CONTRACT, INTERNSHIP)
-- [ ] Define `ExperienceLevel` enum (ENTRY, MID, SENIOR)
-- [ ] Define `RemoteOption` enum (REMOTE, HYBRID, ONSITE)
+- [x] Create `app/models/enums.py`
+- [x] Define `JobType` enum (FULL_TIME, PART_TIME, CONTRACT, INTERNSHIP)
+- [x] Define `ExperienceLevel` enum (ENTRY, MID, SENIOR)
+- [x] Define `RemoteOption` enum (REMOTE, HYBRID, ONSITE)
 
 #### 2.2 Company Model
-- [ ] Create `app/models/company.py`
-- [ ] Define `Company` SQLAlchemy model with fields:
-  - [ ] id (BigInteger, primary key)
-  - [ ] name (String, required)
-  - [ ] description (Text, optional)
-  - [ ] website (String, optional)
-  - [ ] location (String, required)
-  - [ ] created_at (DateTime, auto-generated)
-  - [ ] updated_at (DateTime, auto-updated)
-  - [ ] version (Integer, for optimistic locking)
-- [ ] Add relationship to Job model (one-to-many with cascade delete)
-- [ ] Add `__repr__` method
+- [x] Create `app/models/company.py`
+- [x] Define `Company` SQLAlchemy model with fields:
+  - [x] id (BigInteger, primary key)
+  - [x] name (String, required)
+  - [x] description (Text, optional)
+  - [x] website (String, optional)
+  - [x] location (String, required)
+  - [x] created_at (DateTime, auto-generated)
+  - [x] updated_at (DateTime, auto-updated)
+  - [x] version (Integer, for optimistic locking)
+- [x] Add relationship to Job model (one-to-many with cascade delete)
+- [x] Add `__repr__` method
 
 #### 2.3 Job Model
-- [ ] Create `app/models/job.py`
-- [ ] Define `Job` SQLAlchemy model with fields:
-  - [ ] id (BigInteger, primary key)
-  - [ ] title (String, required)
-  - [ ] description (Text, required)
-  - [ ] company_id (BigInteger, foreign key)
-  - [ ] location (String, required)
-  - [ ] salary_min (Numeric, optional)
-  - [ ] salary_max (Numeric, optional)
-  - [ ] job_type (Enum, required)
-  - [ ] experience_level (Enum, required)
-  - [ ] remote_option (Enum, required)
-  - [ ] posted_date (DateTime, auto-generated)
-  - [ ] expiry_date (DateTime, optional)
-  - [ ] is_active (Boolean, default True)
-  - [ ] application_url (String, optional)
-  - [ ] created_at (DateTime, auto-generated)
-  - [ ] updated_at (DateTime, auto-updated)
-  - [ ] version (Integer, for optimistic locking)
-- [ ] Add relationship to Company model (many-to-one)
-- [ ] Add `__repr__` method
+- [x] Create `app/models/job.py`
+- [x] Define `Job` SQLAlchemy model with fields:
+  - [x] id (BigInteger, primary key)
+  - [x] title (String, required)
+  - [x] description (Text, required)
+  - [x] company_id (BigInteger, foreign key)
+  - [x] location (String, required)
+  - [x] salary_min (Numeric, optional)
+  - [x] salary_max (Numeric, optional)
+  - [x] job_type (Enum, required)
+  - [x] experience_level (Enum, required)
+  - [x] remote_option (Enum, required)
+  - [x] posted_date (DateTime, auto-generated)
+  - [x] expiry_date (DateTime, optional)
+  - [x] is_active (Boolean, default True)
+  - [x] application_url (String, optional)
+  - [x] created_at (DateTime, auto-generated)
+  - [x] updated_at (DateTime, auto-updated)
+  - [x] version (Integer, for optimistic locking)
+- [x] Add relationship to Company model (many-to-one)
+- [x] Add `__repr__` method
 
 #### 2.4 Company Schemas
-- [ ] Create `app/schemas/company_schema.py`
-- [ ] Define `CompanySummarySchema` (minimal company info for embedding)
-- [ ] Define `CompanySchema` (full company details)
-- [ ] Define `CompanyCreateSchema` with validation:
-  - [ ] name (required, length 1-255)
-  - [ ] description (optional)
-  - [ ] website (optional, must be valid URL)
-  - [ ] location (required, length 1-255)
-- [ ] Define `CompanyUpdateSchema` (all fields optional for PATCH)
+- [x] Create `app/schemas/company_schema.py`
+- [x] Define `CompanySummarySchema` (minimal company info for embedding)
+- [x] Define `CompanySchema` (full company details)
+- [x] Define `CompanyCreateSchema` with validation:
+  - [x] name (required, length 1-255)
+  - [x] description (optional)
+  - [x] website (optional, must be valid URL)
+  - [x] location (required, length 1-255)
+- [x] Define `CompanyUpdateSchema` (all fields optional for PATCH)
 
 #### 2.5 Job Schemas
-- [ ] Create `app/schemas/job_schema.py`
-- [ ] Define `JobSchema` (for list responses with embedded company)
-- [ ] Define `JobDetailSchema` (extends JobSchema with full details)
-- [ ] Define `JobCreateSchema` with validation:
-  - [ ] All required fields with proper validators
-  - [ ] Salary validation (min >= 0, max >= 0)
-  - [ ] Enum validation for job_type, experience_level, remote_option
-  - [ ] URL validation for application_url
-  - [ ] Custom validator: salary_max >= salary_min
-  - [ ] Custom validator: expiry_date must be in future
-- [ ] Define `JobUpdateSchema` (all fields optional for PATCH)
-  - [ ] Include same custom validators
+- [x] Create `app/schemas/job_schema.py`
+- [x] Define `JobSchema` (for list responses with embedded company)
+- [x] Define `JobDetailSchema` (extends JobSchema with full details)
+- [x] Define `JobCreateSchema` with validation:
+  - [x] All required fields with proper validators
+  - [x] Salary validation (min >= 0, max >= 0)
+  - [x] Enum validation for job_type, experience_level, remote_option
+  - [x] URL validation for application_url
+  - [x] Custom validator: salary_max >= salary_min
+  - [x] Custom validator: expiry_date must be in future
+- [x] Define `JobUpdateSchema` (all fields optional for PATCH)
+  - [x] Include same custom validators
 
 #### 2.6 Custom Exceptions
-- [ ] Create `app/exceptions/custom_exceptions.py`
-- [ ] Define `JobNotFoundException` with job_id parameter
-- [ ] Define `CompanyNotFoundException` with company_id parameter
-- [ ] Define `OptimisticLockException`
-- [ ] Define `AuthenticationException` (for Phase IV)
-- [ ] Define `InvalidFileException` (for Phase IV)
+- [x] Create `app/exceptions/custom_exceptions.py`
+- [x] Define `JobNotFoundException` with job_id parameter
+- [x] Define `CompanyNotFoundException` with company_id parameter
+- [x] Define `OptimisticLockException`
+- [x] Define `AuthenticationException` (for Phase IV)
+- [x] Define `InvalidFileException` (for Phase IV)
 
 #### 2.7 Global Error Handlers
-- [ ] Create `app/utils/error_handlers.py`
-- [ ] Define `register_error_handlers(app)` function
-- [ ] Add handler for `JobNotFoundException` → 404
-- [ ] Add handler for `CompanyNotFoundException` → 404
-- [ ] Add handler for `ValidationError` (Marshmallow) → 400 with field errors
-- [ ] Add handler for `OptimisticLockException` → 409
-- [ ] Add handler for `StaleDataError` (SQLAlchemy) → 409
-- [ ] Add handler for generic `Exception` → 500
-- [ ] Register error handlers in `app/__init__.py`
+- [x] Create `app/utils/error_handlers.py`
+- [x] Define `register_error_handlers(app)` function
+- [x] Add handler for `JobNotFoundException` → 404
+- [x] Add handler for `CompanyNotFoundException` → 404
+- [x] Add handler for `ValidationError` (Marshmallow) → 400 with field errors
+- [x] Add handler for `OptimisticLockException` → 409
+- [x] Add handler for `StaleDataError` (SQLAlchemy) → 409
+- [x] Add handler for generic `Exception` → 500
+- [x] Register error handlers in `app/__init__.py`
 
 #### 2.8 Testing and Verification
-- [ ] Import models in Python shell to verify no syntax errors
-- [ ] Verify SQLAlchemy can introspect models
-- [ ] Test schema validation with valid data
-- [ ] Test schema validation with invalid data (should raise ValidationError)
-- [ ] Verify custom validators work (salary range, expiry date)
+- [x] Import models in Python shell to verify no syntax errors
+- [x] Verify SQLAlchemy can introspect models
+- [x] Test schema validation with valid data
+- [x] Test schema validation with invalid data (should raise ValidationError)
+- [x] Verify custom validators work (salary range, expiry date)
 
 ---
 
