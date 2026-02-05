@@ -23,7 +23,7 @@
 2. **DB**: Docker Compose starts Postgres (5432) and RabbitMQ (5672, management 15672). Run migrations with venv active: `python migrations/run_migrations.py up`.
 3. **App**: Either (a) Docker app service (`docker-compose up -d` → app on 5000) or (b) local `FLASK_APP=run_server flask run`. Do not run both; Docker app binds 5000 and causes "address already in use" if you also run `flask run`.
 4. **Swagger**: http://localhost:5000/swagger (when app is running via Docker or locally).
-5. **Tests**: `pytest`; use `TestingConfig` and test DB (e.g. `job_board_test`).
+5. **Tests**: `tests/unit/` (services, schemas), `tests/integration/` (repositories), `tests/api/` (endpoints). Run from project root with venv active: `pytest` (all), `pytest tests/unit/ -v` (unit only). `pytest.ini` sets `pythonpath = .` so `app` imports work. Use `TestingConfig` and test DB (e.g. `job_board_test`) for integration/API tests.
 
 ## Technical Constraints
 

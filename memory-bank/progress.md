@@ -2,16 +2,14 @@
 
 ## What Works
 
-- **PR #1 (through 1.5)**: Project structure, requirements, config, `.env.example`, `.gitignore`, `run_server.py`, Docker (Dockerfile, docker-compose: postgres, rabbitmq, app; celery-worker/beat under profile `celery`), app factory (extensions, create_app, CORS, Flask-Injector placeholder), migrations (single `001_initial_schema.sql` + down, runner with up/status/down, schema_migrations).
-- **Docs**: PRD, tasks-phase1.md, memory bank, root README (setup, Docker vs local run), migrations README (prerequisites, commands).
-- **Verification flow**: Venv + pip install → Docker up → run migrations (venv) → app via Docker on 5000 (or stop app container and use local `flask run`). Swagger at /swagger.
+- **PR #1**: Project structure, requirements, config, `.env.example`, `.gitignore`, `run_server.py`, Docker (Dockerfile, docker-compose: postgres, rabbitmq, app; celery-worker/beat under profile `celery`), app factory (extensions, create_app, CORS, Flask-Injector placeholder), migrations (single `001_initial_schema.sql` + down, runner with up/status/down, schema_migrations), verification (venv, Docker, migrations, Swagger).
+- **PR #2**: Models (enums, Company, Job with `utc_now`), schemas (CompanySummary/Company/CompanyCreate/CompanyUpdate, Job/JobDetail/JobCreate/JobUpdate), custom exceptions, global error handlers, `tests/unit/test_schemas.py` (model import, schema validation, salary/expiry validators).
+- **Docs**: PRD, tasks-phase1.md, memory bank, root README (setup, Docker vs local run, tests location and commands, migrations pointer), migrations README, `pytest.ini` (pythonpath = .).
 
 ## What's Left to Build
 
 ### Phase I (Current)
 
-- [ ] Task 1.6: Confirm venv, Docker, migrations, Swagger per updated checklist.
-- [ ] PR #2: Models (Company, Job, enums), Marshmallow schemas (company, job, pagination), custom exceptions, error handlers.
 - [ ] PR #3: Repositories (Company, Job), services with DI, blueprints (companies, jobs), Flask-Injector binding, full CRUD and validation.
 - [ ] Phase I acceptance: Docker up, DB connected, CRUD working, 400/404/409 handled, Swagger at `/swagger`, timestamps and FKs correct.
 
@@ -21,7 +19,7 @@
 
 ### Phase III
 
-- Unit, integration, and API tests; 80%+ coverage; pytest config.
+- More unit, integration, and API tests; 80%+ coverage.
 
 ### Phase IV
 
@@ -33,9 +31,9 @@
 
 ## Current Status
 
-- **Phase**: Phase I; PR #1 done (1.1–1.5), 1.6 documented and aligned with current setup.
+- **Phase**: Phase I; PR #1 and PR #2 done.
 - **Blockers**: None.
-- **Last updated**: Task 1.6 and docs/memory bank updated (venv, migrations, Docker vs local run).
+- **Last updated**: Memory bank and README updated (PR #2 complete, tests location and commands).
 
 ## Known Issues
 

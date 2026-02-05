@@ -3,21 +3,18 @@
 ## Current Focus
 
 - **Phase**: Phase I (Core Setup & Basic CRUD).
-- **Immediate focus**: PR #1 complete through 1.5 (migrations restructured to single initial schema + up/status/down). Task 1.6 (verification) documented; next is PR #2 (models, schemas, exceptions).
+- **Immediate focus**: PR #2 complete (models, schemas, exceptions, error handlers, schema verification tests). Next is PR #3 (repositories, services, DI, blueprints, full CRUD).
 
 ## Recent Changes
 
-- Task 1.6 and docs updated: venv + pip install before migrations; migrations require venv (psycopg2). Docker app service serves on 5000 — do not run `flask run` locally when Docker app is up (address already in use). Use either Docker for the app or stop app container and run `flask run` locally.
-- Root README added: setup (venv, deps, Docker, migrations), running app (Docker vs local), Swagger/RabbitMQ URLs.
-- Migrations README: prerequisites (venv, pip install) before running migration commands.
-- Docker: Postgres healthcheck uses `-d job_board`; Celery services under profile `celery` (not started by default).
-- Migrations: single `001_initial_schema.sql` (+ `.down.sql`), runner with `up` / `status` / `down`, `schema_migrations` tracking.
+- PR #2 completed: enums, Company/Job models (timezone-aware UTC via `app.utils.datetime_utils.utc_now`), company/job schemas (create/update/response), custom exceptions, global error handlers registered in `create_app`, `tests/unit/test_schemas.py` for schema validation and custom validators.
+- `pytest.ini` added with `pythonpath = .` so `from app.*` works when running pytest from project root.
+- README: added Tests section (where tests are, commands: `pytest`, `pytest tests/unit/ -v`, `pytest tests/unit/test_schemas.py -v`).
 
 ## Next Steps
 
-1. PR #2: models (enums, Company, Job), schemas, custom exceptions, error handlers.
-2. PR #3: repositories, services, DI, blueprints (companies, jobs), full CRUD.
-3. When starting work: read `memory-bank/projectbrief.md` and `memory-bank/systemPatterns.md`; use `techContext.md` for setup and constraints.
+1. PR #3: repositories (Company, Job), services with DI, blueprints (companies, jobs), Flask-Injector binding, full CRUD and validation.
+2. When starting work: read `memory-bank/projectbrief.md` and `memory-bank/systemPatterns.md`; use `techContext.md` for setup and constraints.
 
 ## Active Decisions / Open Questions
 

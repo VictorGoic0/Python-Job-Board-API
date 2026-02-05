@@ -41,6 +41,18 @@ Flask REST API for a job board (companies, jobs). Phase I: core setup, Docker, m
 Swagger UI: http://localhost:5000/swagger  
 RabbitMQ management: http://localhost:15672 (admin / admin123)
 
+## Tests
+
+Tests live under `tests/`: `tests/unit/` (services, schemas), `tests/integration/` (repositories, DB), `tests/api/` (HTTP endpoints). Run with venv active from the project root:
+
+```bash
+pytest                    # all tests
+pytest tests/unit/ -v     # unit only
+pytest tests/unit/test_schemas.py -v   # one file
+```
+
+`pytest.ini` sets `pythonpath = .` so `app` imports resolve.
+
 ## Migrations
 
 See [migrations/README.md](migrations/README.md). Summary: venv active, then `python migrations/run_migrations.py up` (or `status`, `down`).
