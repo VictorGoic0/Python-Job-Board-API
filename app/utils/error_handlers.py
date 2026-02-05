@@ -1,3 +1,5 @@
+import traceback
+
 from flask import jsonify
 from marshmallow import ValidationError
 from sqlalchemy.orm.exc import StaleDataError
@@ -41,7 +43,11 @@ def register_error_handlers(app):
 
     @app.errorhandler(Exception)
     def handle_generic_error(error):
-        return (
-            jsonify({"message": "An unexpected error occurred", "status": 500}),
-            500,
-        )
+        # Always log full traceback to console so we can see the real error
+        app.logger.exception("Unhandled exception: %s", error)
+
+        payload = {"message": "An unexpected error occurred", "status": 500}
+        if app.debug:
+            payload["error"] = str(error)
+            payload["traceback"] = traceback.format_exc().splitlines()
+        return jsonify(payload), 500

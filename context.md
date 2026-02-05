@@ -28,11 +28,11 @@ One-file summary of recent PR context so work can continue seamlessly. See `memo
 
 ---
 
-## PR #4: Controller Layer (Routes/Blueprints) — **NEXT**
+## PR #4: Controller Layer (Routes/Blueprints) — **DONE**
 
 - **Scope**: Flask-SMOREST blueprints for Company and Job CRUD, register with api.
-- **Not yet done**: Create `app/routes/companies.py` (companies_blp, CompanyList get/post, CompanyDetail get/patch/delete, inject CompanyService); create `app/routes/jobs.py` (jobs_blp, JobList get/post, JobDetail get/patch/delete, inject JobService); in `app/__init__.py` import and `api.register_blueprint(companies_blp)`, `api.register_blueprint(jobs_blp)`.
-- **Reference**: Full task list in `tasks-phase1.md` § 4.1, 4.2, 4.3; PRD controller layer and schema names (CompanySchema, JobSchema, JobDetailSchema, CompanyCreateSchema, JobCreateSchema, etc.).
+- **Delivered**: `app/routes/companies.py` (companies_blp, CompanyList/CompanyDetail, constructor-inject CompanyService); `app/routes/jobs.py` (jobs_blp, JobList/JobDetail, constructor-inject JobService); blueprints registered in `app/__init__.py`. Manual testing 4.4 complete.
+- **Optimistic locking**: The `version` column exists on `company` and `job`, and 409 handlers exist for `StaleDataError`/`OptimisticLockException`, but the ORM does **not** yet use `version` in UPDATEs (no `version_id_col` or WHERE version check). So PATCH always succeeds; 409 will not occur until version checking is implemented. See `tasks-phase1.md` § 4.5 note.
 
 ---
 

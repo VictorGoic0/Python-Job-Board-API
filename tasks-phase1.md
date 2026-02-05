@@ -284,98 +284,104 @@
 
 **Description**: Implement Flask-SMOREST blueprints for Company and Job CRUD endpoints with proper HTTP methods and status codes.
 
+**Decisions** (documented for consistency):
+- **Company list response**: Use `CompanySchema(many=True)` for both list and single company (same schema; typical convention).
+- **Blueprint URL prefix**: Use full path so routes are under `/api/` — `url_prefix='/api/companies'` and `url_prefix='/api/jobs'` (PRD § Controller Layer and endpoint list; `Api()` in extensions has no extra prefix).
+
 ### Subtasks:
 
 #### 4.1 Company Routes
-- [ ] Create `app/routes/companies.py`
-- [ ] Create `companies_blp` Blueprint with url_prefix='/api/companies'
-- [ ] Define `CompanyList` MethodView class
-  - [ ] Inject `CompanyService`
-  - [ ] Implement `get()` method:
-    - [ ] Call service.get_all_companies()
-    - [ ] Return with 200 status
-    - [ ] Use `@companies_blp.response(200, CompanySchema(many=True))`
-  - [ ] Implement `post()` method:
-    - [ ] Use `@companies_blp.arguments(CompanyCreateSchema)`
-    - [ ] Call service.create_company(data)
-    - [ ] Return with 201 status
-    - [ ] Use `@companies_blp.response(201, CompanySchema)`
-- [ ] Define `CompanyDetail` MethodView class
-  - [ ] Inject `CompanyService`
-  - [ ] Implement `get(company_id)` method:
-    - [ ] Call service.get_company_by_id(company_id)
-    - [ ] Return with 200 status
-  - [ ] Implement `patch(company_data, company_id)` method:
-    - [ ] Use `@companies_blp.arguments(CompanyUpdateSchema)`
-    - [ ] Call service.update_company(company_id, data)
-    - [ ] Return with 200 status
-  - [ ] Implement `delete(company_id)` method:
-    - [ ] Call service.delete_company(company_id)
-    - [ ] Return empty string with 204 status
-- [ ] Register routes with blueprint decorators
+- [x] Create `app/routes/companies.py`
+- [x] Create `companies_blp` Blueprint with url_prefix='/api/companies'
+- [x] Define `CompanyList` MethodView class
+  - [x] Inject `CompanyService`
+  - [x] Implement `get()` method:
+    - [x] Call service.get_all_companies()
+    - [x] Return with 200 status
+    - [x] Use `@companies_blp.response(200, CompanySchema(many=True))`
+  - [x] Implement `post()` method:
+    - [x] Use `@companies_blp.arguments(CompanyCreateSchema)`
+    - [x] Call service.create_company(data)
+    - [x] Return with 201 status
+    - [x] Use `@companies_blp.response(201, CompanySchema)`
+- [x] Define `CompanyDetail` MethodView class
+  - [x] Inject `CompanyService`
+  - [x] Implement `get(company_id)` method:
+    - [x] Call service.get_company_by_id(company_id)
+    - [x] Return with 200 status
+  - [x] Implement `patch(company_data, company_id)` method:
+    - [x] Use `@companies_blp.arguments(CompanyUpdateSchema)`
+    - [x] Call service.update_company(company_id, data)
+    - [x] Return with 200 status
+  - [x] Implement `delete(company_id)` method:
+    - [x] Call service.delete_company(company_id)
+    - [x] Return empty string with 204 status
+- [x] Register routes with blueprint decorators
 
 #### 4.2 Job Routes
-- [ ] Create `app/routes/jobs.py`
-- [ ] Create `jobs_blp` Blueprint with url_prefix='/api/jobs'
-- [ ] Define `JobList` MethodView class
-  - [ ] Inject `JobService`
-  - [ ] Implement `get()` method:
-    - [ ] Call service.get_all_jobs()
-    - [ ] Return with 200 status
-    - [ ] Use `@jobs_blp.response(200, JobSchema(many=True))`
-  - [ ] Implement `post()` method:
-    - [ ] Use `@jobs_blp.arguments(JobCreateSchema)`
-    - [ ] Call service.create_job(data)
-    - [ ] Return with 201 status
-    - [ ] Use `@jobs_blp.response(201, JobSchema)`
-- [ ] Define `JobDetail` MethodView class
-  - [ ] Inject `JobService`
-  - [ ] Implement `get(job_id)` method:
-    - [ ] Call service.get_job_by_id(job_id)
-    - [ ] Return with 200 status
-    - [ ] Use `@jobs_blp.response(200, JobDetailSchema)`
-  - [ ] Implement `patch(job_data, job_id)` method:
-    - [ ] Use `@jobs_blp.arguments(JobUpdateSchema)`
-    - [ ] Call service.update_job(job_id, data)
-    - [ ] Return with 200 status
-  - [ ] Implement `delete(job_id)` method:
-    - [ ] Call service.delete_job(job_id)
-    - [ ] Return empty string with 204 status
-- [ ] Register routes with blueprint decorators
+- [x] Create `app/routes/jobs.py`
+- [x] Create `jobs_blp` Blueprint with url_prefix='/api/jobs'
+- [x] Define `JobList` MethodView class
+  - [x] Inject `JobService`
+  - [x] Implement `get()` method:
+    - [x] Call service.get_all_jobs()
+    - [x] Return with 200 status
+    - [x] Use `@jobs_blp.response(200, JobSchema(many=True))`
+  - [x] Implement `post()` method:
+    - [x] Use `@jobs_blp.arguments(JobCreateSchema)`
+    - [x] Call service.create_job(data)
+    - [x] Return with 201 status
+    - [x] Use `@jobs_blp.response(201, JobSchema)`
+- [x] Define `JobDetail` MethodView class
+  - [x] Inject `JobService`
+  - [x] Implement `get(job_id)` method:
+    - [x] Call service.get_job_by_id(job_id)
+    - [x] Return with 200 status
+    - [x] Use `@jobs_blp.response(200, JobDetailSchema)`
+  - [x] Implement `patch(job_data, job_id)` method:
+    - [x] Use `@jobs_blp.arguments(JobUpdateSchema)`
+    - [x] Call service.update_job(job_id, data)
+    - [x] Return with 200 status
+  - [x] Implement `delete(job_id)` method:
+    - [x] Call service.delete_job(job_id)
+    - [x] Return empty string with 204 status
+- [x] Register routes with blueprint decorators
 
 #### 4.3 Blueprint Registration
-- [ ] Update `app/__init__.py`
-- [ ] Import `jobs_blp` from app.routes.jobs
-- [ ] Import `companies_blp` from app.routes.companies
-- [ ] Register jobs blueprint with api: `api.register_blueprint(jobs_blp)`
-- [ ] Register companies blueprint with api: `api.register_blueprint(companies_blp)`
+- [x] Update `app/__init__.py`
+- [x] Import `jobs_blp` from app.routes.jobs
+- [x] Import `companies_blp` from app.routes.companies
+- [x] Register jobs blueprint with api: `api.register_blueprint(jobs_blp)`
+- [x] Register companies blueprint with api: `api.register_blueprint(companies_blp)`
 
 #### 4.4 Manual Testing with curl/Postman
-- [ ] Start the Flask application
-- [ ] Test Company endpoints:
-  - [ ] POST /api/companies (create company)
-  - [ ] GET /api/companies (list all companies)
-  - [ ] GET /api/companies/{id} (get specific company)
-  - [ ] PATCH /api/companies/{id} (update company)
-  - [ ] DELETE /api/companies/{id} (delete company)
-- [ ] Test Job endpoints:
-  - [ ] POST /api/jobs (create job with valid company_id)
-  - [ ] GET /api/jobs (list all jobs with company data)
-  - [ ] GET /api/jobs/{id} (get specific job with full details)
-  - [ ] PATCH /api/jobs/{id} (update job)
-  - [ ] DELETE /api/jobs/{id} (delete job)
-- [ ] Test error cases:
-  - [ ] POST with missing required fields → 400 with validation errors
-  - [ ] GET with non-existent ID → 404
-  - [ ] POST job with invalid company_id → 404 CompanyNotFoundException
-  - [ ] PATCH with invalid data → 400
-- [ ] Verify Swagger UI shows all endpoints at /swagger
+- [x] Start the Flask application
+- [x] Test Company endpoints:
+  - [x] POST /api/companies (create company)
+  - [x] GET /api/companies (list all companies)
+  - [x] GET /api/companies/{id} (get specific company)
+  - [x] PATCH /api/companies/{id} (update company)
+  - [x] DELETE /api/companies/{id} (delete company)
+- [x] Test Job endpoints:
+  - [x] POST /api/jobs (create job with valid company_id)
+  - [x] GET /api/jobs (list all jobs with company data)
+  - [x] GET /api/jobs/{id} (get specific job with full details)
+  - [x] PATCH /api/jobs/{id} (update job)
+  - [x] DELETE /api/jobs/{id} (delete job)
+- [x] Test error cases:
+  - [x] POST with missing required fields → 400 with validation errors
+  - [x] GET with non-existent ID → 404
+  - [x] POST job with invalid company_id → 404 CompanyNotFoundException
+  - [x] PATCH with invalid data → 400
+- [x] Verify Swagger UI shows all endpoints at /swagger
 
 #### 4.5 Test Optimistic Locking
 - [ ] Create a job via API
 - [ ] In database, manually update the version number
 - [ ] Try to update the job via API
 - [ ] Verify 409 Conflict response is returned
+
+**Note (current state):** Optimistic locking is **not yet implemented**. The `version` column exists on `company` and `job`, and the app has error handlers for `StaleDataError` → 409, but the ORM/repository does **not** use `version` in the UPDATE (no `version_id_col` or `WHERE version = ?`). So PATCH succeeds even when the DB row’s version was changed; 409 will not occur until we add version checking (e.g. SQLAlchemy `version_id_col` or an explicit version check in the repository). 4.5 verification is deferred until that is implemented.
 
 ---
 

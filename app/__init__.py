@@ -10,11 +10,19 @@ from config import config
 def create_app(config_name="development"):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
+    if config_name == "development":
+        app.config["DEBUG"] = True
 
     db.init_app(app)
     ma.init_app(app)
     api.init_app(app)
     CORS(app)
+
+    from app.routes.companies import companies_blp
+    from app.routes.jobs import jobs_blp
+
+    api.register_blueprint(jobs_blp)
+    api.register_blueprint(companies_blp)
 
     from app.utils.error_handlers import register_error_handlers
 
