@@ -396,95 +396,95 @@
 ### Subtasks:
 
 #### 5.1 Test Configuration
-- [ ] Create `pytest.ini` with configuration:
-  - [ ] testpaths = tests
-  - [ ] python_files = test_*.py
-  - [ ] coverage settings (--cov=app, --cov-fail-under=80)
-- [ ] Create `tests/conftest.py`
-- [ ] Define `app` fixture (session scope, testing config)
-- [ ] Define `client` fixture (function scope, test client)
-- [ ] Define `db_session` fixture (function scope, clean database)
-- [ ] Define `sample_company` fixture (creates test company)
-- [ ] Define `sample_job` fixture (creates test job with sample_company)
+- [x] Create `pytest.ini` with configuration:
+  - [x] testpaths = tests
+  - [x] python_files = test_*.py
+  - [x] coverage settings (--cov=app, --cov-fail-under=80)
+- [x] Create `tests/conftest.py`
+- [x] Define `app` fixture (session scope, testing config)
+- [x] Define `client` fixture (function scope, test client)
+- [x] Define `db_session` fixture (function scope, clean database)
+- [x] Define `sample_company` fixture (creates test company)
+- [x] Define `sample_job` fixture (creates test job with sample_company)
 
 #### 5.2 Unit Tests - Company Service
-- [ ] Create `tests/unit/test_company_service.py`
-- [ ] Set up mock repositories in setup_method
-- [ ] Test `get_all_companies()` returns list
-- [ ] Test `get_company_by_id()` with existing company
-- [ ] Test `get_company_by_id()` raises CompanyNotFoundException
-- [ ] Test `create_company()` with valid data
-- [ ] Test `update_company()` updates only provided fields
-- [ ] Test `update_company()` raises CompanyNotFoundException
-- [ ] Test `delete_company()` calls repository delete
-- [ ] Test `delete_company()` raises CompanyNotFoundException
+- [x] Create `tests/unit/test_company_service.py`
+- [x] Set up mock repositories in setup_method
+- [x] Test `get_all_companies()` returns list
+- [x] Test `get_company_by_id()` with existing company
+- [x] Test `get_company_by_id()` raises CompanyNotFoundException
+- [x] Test `create_company()` with valid data
+- [x] Test `update_company()` updates only provided fields
+- [x] Test `update_company()` raises CompanyNotFoundException
+- [x] Test `delete_company()` calls repository delete
+- [x] Test `delete_company()` raises CompanyNotFoundException
 
 #### 5.3 Unit Tests - Job Service
-- [ ] Create `tests/unit/test_job_service.py`
-- [ ] Set up mock repositories in setup_method
-- [ ] Test `get_all_jobs()` returns list
-- [ ] Test `get_job_by_id()` with existing job
-- [ ] Test `get_job_by_id()` raises JobNotFoundException
-- [ ] Test `create_job()` with valid data
-- [ ] Test `create_job()` raises CompanyNotFoundException for invalid company_id
-- [ ] Test `update_job()` updates only provided fields
-- [ ] Test `update_job()` validates new company_id
-- [ ] Test `update_job()` raises JobNotFoundException
-- [ ] Test `delete_job()` calls repository delete
-- [ ] Test `delete_job()` raises JobNotFoundException
+- [x] Create `tests/unit/test_job_service.py`
+- [x] Set up mock repositories in setup_method
+- [x] Test `get_all_jobs()` returns list
+- [x] Test `get_job_by_id()` with existing job
+- [x] Test `get_job_by_id()` raises JobNotFoundException
+- [x] Test `create_job()` with valid data
+- [x] Test `create_job()` raises CompanyNotFoundException for invalid company_id
+- [x] Test `update_job()` updates only provided fields
+- [x] Test `update_job()` validates new company_id
+- [x] Test `update_job()` raises JobNotFoundException
+- [x] Test `delete_job()` calls repository delete
+- [x] Test `delete_job()` raises JobNotFoundException
 
 #### 5.4 Integration Tests - Company Repository
-- [ ] Create `tests/integration/test_company_repository.py`
-- [ ] Test `find_all()` returns all companies
-- [ ] Test `find_by_id()` returns company when exists
-- [ ] Test `find_by_id()` returns None when not exists
-- [ ] Test `find_by_name()` returns company
-- [ ] Test `save()` creates new company
-- [ ] Test `save()` updates existing company
-- [ ] Test `delete()` removes company from database
-- [ ] Test cascade delete (deleting company deletes associated jobs)
+- [x] Create `tests/integration/test_company_repository.py`
+- [x] Test `find_all()` returns all companies
+- [x] Test `find_by_id()` returns company when exists
+- [x] Test `find_by_id()` returns None when not exists
+- [x] Test `find_by_name()` returns company
+- [x] Test `save()` creates new company
+- [x] Test `save()` updates existing company
+- [x] Test `delete()` removes company from database
+- [x] Test cascade delete (deleting company deletes associated jobs)
 
 #### 5.5 Integration Tests - Job Repository
-- [ ] Create `tests/integration/test_job_repository.py`
-- [ ] Test `find_all()` returns all jobs with company data
-- [ ] Test `find_by_id()` returns job with company when exists
-- [ ] Test `find_by_id()` returns None when not exists
-- [ ] Test `find_by_company_id()` returns jobs for specific company
-- [ ] Test `save()` creates new job
-- [ ] Test `save()` updates existing job
-- [ ] Test `delete()` removes job from database
-- [ ] Test foreign key constraint (cannot create job with invalid company_id)
+- [x] Create `tests/integration/test_job_repository.py`
+- [x] Test `find_all()` returns all jobs with company data
+- [x] Test `find_by_id()` returns job with company when exists
+- [x] Test `find_by_id()` returns None when not exists
+- [x] Test `find_by_company_id()` returns jobs for specific company
+- [x] Test `save()` creates new job
+- [x] Test `save()` updates existing job
+- [x] Test `delete()` removes job from database
+- [x] Test foreign key constraint (cannot create job with invalid company_id)
 
 #### 5.6 API Tests - Company Routes
-- [ ] Create `tests/api/test_company_routes.py`
-- [ ] Test GET /api/companies returns 200 and list
-- [ ] Test GET /api/companies/{id} returns 200 and company data
-- [ ] Test GET /api/companies/{invalid_id} returns 404
-- [ ] Test POST /api/companies with valid data returns 201
-- [ ] Test POST /api/companies with invalid data returns 400
-- [ ] Test POST /api/companies with missing fields returns 400
-- [ ] Test PATCH /api/companies/{id} with valid data returns 200
-- [ ] Test PATCH /api/companies/{id} updates only provided fields
-- [ ] Test PATCH /api/companies/{invalid_id} returns 404
-- [ ] Test DELETE /api/companies/{id} returns 204
-- [ ] Test DELETE /api/companies/{invalid_id} returns 404
+- [x] Create `tests/api/test_company_routes.py`
+- [x] Test GET /api/companies returns 200 and list
+- [x] Test GET /api/companies/{id} returns 200 and company data
+- [x] Test GET /api/companies/{invalid_id} returns 404
+- [x] Test POST /api/companies with valid data returns 201
+- [x] Test POST /api/companies with invalid data returns 400
+- [x] Test POST /api/companies with missing fields returns 400
+- [x] Test PATCH /api/companies/{id} with valid data returns 200
+- [x] Test PATCH /api/companies/{id} updates only provided fields
+- [x] Test PATCH /api/companies/{invalid_id} returns 404
+- [x] Test DELETE /api/companies/{id} returns 204
+- [x] Test DELETE /api/companies/{invalid_id} returns 404
 
 #### 5.7 API Tests - Job Routes
-- [ ] Create `tests/api/test_job_routes.py`
-- [ ] Test GET /api/jobs returns 200 and list with company data
-- [ ] Test GET /api/jobs/{id} returns 200 and full job details
-- [ ] Test GET /api/jobs/{invalid_id} returns 404
-- [ ] Test POST /api/jobs with valid data returns 201
-- [ ] Test POST /api/jobs with invalid company_id returns 404
-- [ ] Test POST /api/jobs with missing required fields returns 400
-- [ ] Test POST /api/jobs with invalid enum values returns 400
-- [ ] Test POST /api/jobs with salary_max < salary_min returns 400
-- [ ] Test POST /api/jobs with past expiry_date returns 400
-- [ ] Test PATCH /api/jobs/{id} with valid data returns 200
-- [ ] Test PATCH /api/jobs/{id} updates only provided fields
-- [ ] Test PATCH /api/jobs/{invalid_id} returns 404
-- [ ] Test DELETE /api/jobs/{id} returns 204
-- [ ] Test DELETE /api/jobs/{invalid_id} returns 404
+- [x] Create `tests/api/test_job_routes.py`
+- [x] Test GET /api/jobs returns 200 and list with company data
+- [x] Test GET /api/jobs/{id} returns 200 and full job details
+- [x] Test GET /api/jobs/{invalid_id} returns 404
+- [x] Test POST /api/jobs with valid data returns 201
+- [x] Test POST /api/jobs with invalid company_id returns 404
+- [x] Test POST /api/jobs with missing required fields returns 400
+- [x] Test POST /api/jobs with invalid enum values returns 400
+- [x] Test POST /api/jobs with salary_max < salary_min returns 400
+- [x] Test POST /api/jobs with past expiry_date returns 400
+- [x] Test PATCH /api/jobs/{id} with valid data returns 200
+- [x] Test PATCH /api/jobs/{id} updates only provided fields
+- [x] Test PATCH /api/jobs/{invalid_id} returns 404
+- [x] Test DELETE /api/jobs/{id} returns 204
+- [x] Test DELETE /api/jobs/{invalid_id} returns 404
 
 #### 5.8 Run Tests and Fix Issues
 - [ ] Run all tests: `pytest`
