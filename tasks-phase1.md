@@ -11,69 +11,69 @@
 ### Subtasks:
 
 #### 1.1 Project Structure
-- [ ] Create root project directory `job-board-api/`
-- [ ] Create directory structure:
-  - [ ] `app/` (main application package)
-  - [ ] `app/models/`
-  - [ ] `app/schemas/`
-  - [ ] `app/repositories/`
-  - [ ] `app/services/`
-  - [ ] `app/routes/`
-  - [ ] `app/exceptions/`
-  - [ ] `app/utils/`
-  - [ ] `migrations/`
-  - [ ] `tests/`
-  - [ ] `docker/`
-- [ ] Create all `__init__.py` files in Python packages
+- [x] Create root project directory `job-board-api/`
+- [x] Create directory structure:
+  - [x] `app/` (main application package)
+  - [x] `app/models/`
+  - [x] `app/schemas/`
+  - [x] `app/repositories/`
+  - [x] `app/services/`
+  - [x] `app/routes/`
+  - [x] `app/exceptions/`
+  - [x] `app/utils/`
+  - [x] `migrations/`
+  - [x] `tests/`
+  - [x] `docker/`
+- [x] Create all `__init__.py` files in Python packages
 
 #### 1.2 Dependencies and Configuration
-- [ ] Create `requirements.txt` with all dependencies (Flask, SQLAlchemy, Marshmallow, etc.)
-- [ ] Create `config.py` with Config classes (Development, Testing, Production)
-- [ ] Create `.env.example` file with environment variable templates
-- [ ] Create `.gitignore` file (Python, venv, Docker, IDE files)
-- [ ] Create `run.py` as application entry point
+- [x] Create `requirements.txt` with all dependencies (Flask, SQLAlchemy, Marshmallow, etc.)
+- [x] Create `config.py` with Config classes (Development, Testing, Production)
+- [x] Create `.env.example` file with environment variable templates
+- [x] Create `.gitignore` file (Python, venv, Docker, IDE files)
+- [x] Create `run_server.py` as application entry point
 
 #### 1.3 Docker Configuration
-- [ ] Create `docker/Dockerfile` with Python 3.11 base image
-- [ ] Add PostgreSQL client installation to Dockerfile
-- [ ] Configure dependency caching layer in Dockerfile
-- [ ] Create `docker-compose.yml` with services:
-  - [ ] PostgreSQL service with health check
-  - [ ] RabbitMQ service with management UI
-  - [ ] Flask app service with volume mounts
-  - [ ] Celery worker service (placeholder for Phase IV)
-  - [ ] Celery beat service (placeholder for Phase IV)
-- [ ] Configure service dependencies and health checks
-- [ ] Set up named volumes for PostgreSQL data persistence
+- [x] Create `docker/Dockerfile` with Python 3.11 base image
+- [x] Add PostgreSQL client installation to Dockerfile
+- [x] Configure dependency caching layer in Dockerfile
+- [x] Create `docker-compose.yml` with services:
+  - [x] PostgreSQL service with health check
+  - [x] RabbitMQ service with management UI
+  - [x] Flask app service with volume mounts
+  - [x] Celery worker service (placeholder for Phase IV)
+  - [x] Celery beat service (placeholder for Phase IV)
+- [x] Configure service dependencies and health checks
+- [x] Set up named volumes for PostgreSQL data persistence
 
 #### 1.4 Flask Application Factory
-- [ ] Create `app/extensions.py` to initialize Flask extensions (db, ma, api)
-- [ ] Create `app/__init__.py` with `create_app()` factory function
-- [ ] Initialize SQLAlchemy in factory
-- [ ] Initialize Marshmallow in factory
-- [ ] Initialize Flask-SMOREST API in factory
-- [ ] Configure CORS
-- [ ] Set up Flask-Injector placeholder (will configure in PR #3)
+- [x] Create `app/extensions.py` to initialize Flask extensions (db, ma, api)
+- [x] Create `app/__init__.py` with `create_app()` factory function
+- [x] Initialize SQLAlchemy in factory
+- [x] Initialize Marshmallow in factory
+- [x] Initialize Flask-SMOREST API in factory
+- [x] Configure CORS
+- [x] Set up Flask-Injector placeholder (will configure in PR #3)
 
 #### 1.5 Database Migrations
-- [ ] Create `migrations/001_create_company_table.sql` with Company table schema
-- [ ] Create `migrations/002_create_job_table.sql` with Job table schema and indexes
-- [ ] Create `migrations/run_migrations.py` script:
-  - [ ] Parse DATABASE_URL from environment
-  - [ ] Connect to PostgreSQL
-  - [ ] Find and sort all .sql files
-  - [ ] Execute each migration in order
-  - [ ] Add error handling and rollback
-  - [ ] Add success/failure logging
+- [x] Create `migrations/001_create_company_table.sql` with Company table schema
+- [x] Create `migrations/002_create_job_table.sql` with Job table schema and indexes
+- [x] Create `migrations/run_migrations.py` script:
+  - [x] Parse DATABASE_URL from environment
+  - [x] Connect to PostgreSQL
+  - [x] Find and sort all .sql files
+  - [x] Execute each migration in order
+  - [x] Add error handling and rollback
+  - [x] Add success/failure logging
 
 #### 1.6 Testing and Verification
-- [ ] Start Docker Compose: `docker-compose up -d`
+- [ ] Create venv and install dependencies: `python3 -m venv venv`, `source venv/bin/activate`, `pip install -r requirements.txt`
+- [ ] Start Docker Compose (postgres, rabbitmq, app): `docker-compose up -d`
 - [ ] Verify PostgreSQL is running and accessible
-- [ ] Verify RabbitMQ is running (management UI at localhost:15672)
-- [ ] Run migrations: `python migrations/run_migrations.py`
-- [ ] Verify tables created in PostgreSQL
-- [ ] Start Flask app: `flask run`
-- [ ] Verify app starts without errors
+- [ ] Verify RabbitMQ is running (management UI at http://localhost:15672)
+- [ ] Run migrations locally (venv active, DATABASE_URL pointing at Postgres): `python migrations/run_migrations.py up`
+- [ ] Verify tables created in PostgreSQL (e.g. `schema_migrations`, `company`, `job`)
+- [ ] Verify Flask app: when Docker app service is running, the app is already served on port 5000 — do **not** run `flask run` locally or you get "address already in use". Use Docker for the app, or stop the app container and run `FLASK_APP=run_server flask run` locally.
 - [ ] Access Swagger UI at http://localhost:5000/swagger
 
 ---
