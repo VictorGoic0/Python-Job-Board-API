@@ -1,12 +1,13 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_injector import FlaskInjector
+from injector import singleton
 
 from app.extensions import db, ma, api
 from config import config
 
 
-def create_app(config_name='development'):
+def create_app(config_name="development"):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
 
@@ -25,7 +26,15 @@ def create_app(config_name='development'):
 
 
 def _configure_injector(app):
+    from app.repositories.company_repository import CompanyRepository
+    from app.repositories.job_repository import JobRepository
+    from app.services.company_service import CompanyService
+    from app.services.job_service import JobService
+
     def configure(binder):
-        pass
+        binder.bind(CompanyRepository, to=CompanyRepository, scope=singleton)
+        binder.bind(JobRepository, to=JobRepository, scope=singleton)
+        binder.bind(CompanyService, to=CompanyService, scope=singleton)
+        binder.bind(JobService, to=JobService, scope=singleton)
 
     FlaskInjector(app=app, modules=[configure])

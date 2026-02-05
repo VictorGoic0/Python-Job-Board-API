@@ -195,84 +195,84 @@
 ### Subtasks:
 
 #### 3.1 Company Repository
-- [ ] Create `app/repositories/company_repository.py`
-- [ ] Define `CompanyRepository` class
-- [ ] Implement `find_all()` → returns all companies
-- [ ] Implement `find_by_id(company_id)` → returns company or None
-- [ ] Implement `find_by_name(name)` → returns company or None
-- [ ] Implement `save(company)` → saves and returns company (handles create/update)
-- [ ] Implement `delete(company)` → deletes company
+- [x] Create `app/repositories/company_repository.py`
+- [x] Define `CompanyRepository` class
+- [x] Implement `find_all()` → returns all companies
+- [x] Implement `find_by_id(company_id)` → returns company or None
+- [x] Implement `find_by_name(name)` → returns company or None
+- [x] Implement `save(company)` → saves and returns company (handles create/update)
+- [x] Implement `delete(company)` → deletes company
 
 #### 3.2 Job Repository
-- [ ] Create `app/repositories/job_repository.py`
-- [ ] Define `JobRepository` class
-- [ ] Implement `find_all()` → returns all jobs with company data (use joinedload)
-- [ ] Implement `find_by_id(job_id)` → returns job with company or None (use joinedload)
-- [ ] Implement `find_by_company_id(company_id)` → returns jobs for a company
-- [ ] Implement `save(job)` → saves and returns job
-- [ ] Implement `delete(job)` → deletes job
+- [x] Create `app/repositories/job_repository.py`
+- [x] Define `JobRepository` class
+- [x] Implement `find_all()` → returns all jobs with company data (use joinedload)
+- [x] Implement `find_by_id(job_id)` → returns job with company or None (use joinedload)
+- [x] Implement `find_by_company_id(company_id)` → returns jobs for a company
+- [x] Implement `save(job)` → saves and returns job
+- [x] Implement `delete(job)` → deletes job
 
 #### 3.3 Company Service
-- [ ] Create `app/services/company_service.py`
-- [ ] Define `CompanyService` class with `@inject` decorator
-- [ ] Inject `CompanyRepository` in constructor
-- [ ] Implement `get_all_companies()` → List[Company]
-- [ ] Implement `get_company_by_id(company_id)` → Company (raises CompanyNotFoundException if not found)
-- [ ] Implement `create_company(data: dict)` → Company
-  - [ ] Create Company instance from data
-  - [ ] Save via repository
-  - [ ] Return created company
-- [ ] Implement `update_company(company_id, data: dict)` → Company
-  - [ ] Fetch existing company
-  - [ ] Update only provided fields
-  - [ ] Handle optimistic locking (catch StaleDataError)
-  - [ ] Return updated company
-- [ ] Implement `delete_company(company_id)` → None
-  - [ ] Fetch company
-  - [ ] Delete via repository
+- [x] Create `app/services/company_service.py`
+- [x] Define `CompanyService` class with `@inject` decorator
+- [x] Inject `CompanyRepository` in constructor
+- [x] Implement `get_all_companies()` → List[Company]
+- [x] Implement `get_company_by_id(company_id)` → Company (raises CompanyNotFoundException if not found)
+- [x] Implement `create_company(data: dict)` → Company
+  - [x] Create Company instance from data
+  - [x] Save via repository
+  - [x] Return created company
+- [x] Implement `update_company(company_id, data: dict)` → Company
+  - [x] Fetch existing company
+  - [x] Update only provided fields
+  - [x] Handle optimistic locking (catch StaleDataError)
+  - [x] Return updated company
+- [x] Implement `delete_company(company_id)` → None
+  - [x] Fetch company
+  - [x] Delete via repository
 
 #### 3.4 Job Service
-- [ ] Create `app/services/job_service.py`
-- [ ] Define `JobService` class with `@inject` decorator
-- [ ] Inject `JobRepository` and `CompanyRepository` in constructor
-- [ ] Implement `get_all_jobs()` → List[Job]
-- [ ] Implement `get_job_by_id(job_id)` → Job (raises JobNotFoundException if not found)
-- [ ] Implement `create_job(data: dict)` → Job
-  - [ ] Validate company exists (raise CompanyNotFoundException if not)
-  - [ ] Convert string enums to enum types
-  - [ ] Create Job instance
-  - [ ] Set posted_date to current UTC time
-  - [ ] Save via repository
-  - [ ] Return created job
-- [ ] Implement `update_job(job_id, data: dict)` → Job
-  - [ ] Fetch existing job
-  - [ ] Validate new company_id if provided
-  - [ ] Convert string enums to enum types
-  - [ ] Update only provided fields
-  - [ ] Handle optimistic locking
-  - [ ] Return updated job
-- [ ] Implement `delete_job(job_id)` → None
-  - [ ] Fetch job
-  - [ ] Delete via repository
+- [x] Create `app/services/job_service.py`
+- [x] Define `JobService` class with `@inject` decorator
+- [x] Inject `JobRepository` and `CompanyRepository` in constructor
+- [x] Implement `get_all_jobs()` → List[Job]
+- [x] Implement `get_job_by_id(job_id)` → Job (raises JobNotFoundException if not found)
+- [x] Implement `create_job(data: dict)` → Job
+  - [x] Validate company exists (raise CompanyNotFoundException if not)
+  - [x] Convert string enums to enum types
+  - [x] Create Job instance
+  - [x] Set posted_date to current UTC time
+  - [x] Save via repository
+  - [x] Return created job
+- [x] Implement `update_job(job_id, data: dict)` → Job
+  - [x] Fetch existing job
+  - [x] Validate new company_id if provided
+  - [x] Convert string enums to enum types
+  - [x] Update only provided fields
+  - [x] Handle optimistic locking
+  - [x] Return updated job
+- [x] Implement `delete_job(job_id)` → None
+  - [x] Fetch job
+  - [x] Delete via repository
 
 #### 3.5 Dependency Injection Configuration
-- [ ] Update `app/__init__.py`
-- [ ] Create `configure_injector(app)` function
-- [ ] Configure injector bindings:
-  - [ ] JobRepository → singleton
-  - [ ] CompanyRepository → singleton
-  - [ ] JobService → singleton
-  - [ ] CompanyService → singleton
-- [ ] Call `FlaskInjector(app=app, modules=[configure])`
+- [x] Update `app/__init__.py`
+- [x] Create `configure_injector(app)` function
+- [x] Configure injector bindings:
+  - [x] JobRepository → singleton
+  - [x] CompanyRepository → singleton
+  - [x] JobService → singleton
+  - [x] CompanyService → singleton
+- [x] Call `FlaskInjector(app=app, modules=[configure])`
 
 #### 3.6 Testing and Verification
-- [ ] Test repository methods directly in Python shell
-- [ ] Create test company via repository
-- [ ] Create test job via repository with company_id
-- [ ] Verify foreign key constraint works (cascade delete)
-- [ ] Test service methods in Python shell
-- [ ] Verify CompanyNotFoundException is raised for invalid ID
-- [ ] Verify JobNotFoundException is raised for invalid ID
+- [x] Test repository methods directly in Python shell
+- [x] Create test company via repository
+- [x] Create test job via repository with company_id
+- [x] Verify foreign key constraint works (cascade delete)
+- [x] Test service methods in Python shell
+- [x] Verify CompanyNotFoundException is raised for invalid ID
+- [x] Verify JobNotFoundException is raised for invalid ID
 
 ---
 
