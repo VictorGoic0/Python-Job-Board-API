@@ -46,12 +46,25 @@ RabbitMQ management: http://localhost:15672 (admin / admin123)
 Tests live under `tests/`: `tests/unit/` (services, schemas), `tests/integration/` (repositories, DB), `tests/api/` (HTTP endpoints). Run with venv active from the project root:
 
 ```bash
-pytest                    # all tests
-pytest tests/unit/ -v     # unit only
+pytest                    # all tests (needs test DB for integration/api)
+pytest tests/unit/ -v     # unit only (no DB)
 pytest tests/unit/test_schemas.py -v   # one file
 ```
 
-`pytest.ini` sets `pythonpath = .` so `app` imports resolve.
+**Test database:** Integration and API tests use PostgreSQL database `job_board_test` (same user/password as main DB). The project does not create it automatically. To run the full suite and get ≥80% coverage:
+
+```bash
+# With Docker Postgres running:
+docker exec job_board_db psql -U admin -d postgres -c "CREATE DATABASE job_board_test;"
+# Or from host (psql installed):
+PGPASSWORD=admin123 psql -h localhost -U admin -d postgres -c "CREATE DATABASE job_board_test;"
+
+pytest   # 66 tests, coverage report
+```
+
+Without `job_board_test`, `pytest` still runs: 25 unit tests pass and 41 integration/API tests are skipped.
+
+`pytest.ini` sets `pythonpath = .` and coverage options (`--cov=app --cov-fail-under=80`).
 
 ## Migrations
 

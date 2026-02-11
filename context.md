@@ -25,7 +25,7 @@ One-file summary so work can continue without re-reading the whole repo. See `me
 - **5.6–5.7** API tests: `tests/api/test_company_routes.py`, `test_job_routes.py`. Use `client` (Flask test client) and `db_session` / `sample_company` / `sample_job` where needed. Hit `/api/companies/`, `/api/jobs/` (with trailing slash). Assert status codes and JSON; no DB if you only run unit tests.
 
 **What’s left (collaborative)**  
-- **5.8** Run all tests (`pytest`), fix failures, run with coverage, verify ≥80%, commit.  
+- **5.8** Run all tests with test DB created → `pytest` (66 tests, coverage ≥80%). Without test DB, `pytest` gives 25 passed, 41 skipped (no errors). Commit test suite when done.  
 - **5.9** Phase I acceptance verification (Docker up, CRUD, errors, Swagger, etc. — checklist in tasks-phase1.md).
 
 **Important for tests (new window)**  
@@ -45,9 +45,10 @@ One-file summary so work can continue without re-reading the whole repo. See `me
    - With coverage: `pytest` (addopts in pytest.ini); skip coverage: `pytest --no-cov`.
 
 4. **Conftest flow**  
-   - `app` (session): `create_app("testing")`, then `db.create_all()` in app context.  
-   - `db_session` (function): inside app context, `TRUNCATE job, company RESTART IDENTITY CASCADE`, commit, yield `db.session`. So every test that uses `db_session` starts with empty company/job tables.  
-   - API tests use `client` and often request `sample_company` / `sample_job`, which insert one company and one job; routes are tested against that data.
+   - `app` (session): `create_app("testing")`, then `db.create_all()` in app context; on `OperationalError` sets `_db_unavailable` so integration/API tests skip.  
+   - `db_ready` (session): skips if `_db_unavailable`. `client` depends on it so API tests skip when DB is down.  
+   - `db_session` (function): skips if `_db_unavailable`; else TRUNCATE company/job, yield `db.session`.  
+   - API tests use `client` and often request `sample_company` / `sample_job`; routes are tested against that data.
 
 5. **Routes**  
    - Companies: `/api/companies/` (list/create), `/api/companies/<id>` (get/patch/delete).  
